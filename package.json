@@ -1,0 +1,24 @@
+{
+  "name": "node.notes",
+  "version": "1.0.0",
+  "description": "a simple notes CRUD app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Harry-Kwon/node/notes.git"
+  },
+  "keywords": [
+    "CRUD"
+  ],
+  "author": "Harry Kwon",
+  "license": "ISC",
+  "homepage": "https://github.com/Harry-Kwon/node/notes.git#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4"
+  }
+}
