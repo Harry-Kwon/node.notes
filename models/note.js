@@ -14,7 +14,7 @@ Note.prototype.generateNodeId = function(data){
 
 Note.prototype.schema = {
   name: String,
- 	id: String;
+ 	id: String
 };
 
 module.exports = Note;

@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 module.exports.connect = function() {
   //Connect to database
-  mongoose.connect('mongodb://test:password1@ds053370.mlab.com:53370/notes-app');
+  mongoose.connect('mongodb://test:password1@ds053370.mlab.com:53370/notes-app', {useNewUrlParser: true});
 };
 
 module.exports.createSchema = function(schema) {
@@ -17,7 +17,13 @@ module.exports.findRecord = function(model, search, callback) {
   Todo.find(search, callback);
 };
 
-module.exports.createRecord = function(){};
+module.exports.createRecord = function(model, data, callback){
+  var newRecord = model(data).save(function(err, data){
+    if(err) throw err;
+    callback();
+  });
+};
+
 module.exports.readRecord = function(){};
 module.exports.updateRecord = function(){};
 module.exports.deleteRecord = function(){};
