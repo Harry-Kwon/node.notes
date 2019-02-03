@@ -16,7 +16,7 @@ h1 {
   position: relative;
   width: 95%;
   margin: 0 auto;
-  padding: 20px;
+  padding: 0px;
   
   
   box-sizing: border-box;
@@ -57,13 +57,13 @@ ul {
 
 li {
   width: 100%;
-  padding: 20px;
+  padding: 10px 2px;
   
   border-width: 1%;
   border-style: solid;
   border-color: black;
   
-  box-sizing: content-box;
+  box-sizing: border-box;
   
   margin:5px;
   
@@ -89,14 +89,33 @@ li p {
 }
 
 li textarea{
+  font-family: arial;
+  font-size: 20px;
+  font-weight: 700;
+  
+  overflow: hidden;
+  overflow-wrap: break-word;
+  
+  box-shadow: none;
+  background: transparent;
+  resize: none;
+  
   width: 100%;
+  min-height: 24px;
   border-width: 3px;
-  border-color: black;
+  border-color: transparent;*/
   box-sizing: border-box;
   
   justify-self: start;
   
 }
+
+li textarea:focus {
+  outline: none !important;
+  box-shadow: inset 0 0 0 2px white;
+}
+
+
 
 li button {
   justify-self: end;

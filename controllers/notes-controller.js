@@ -4,8 +4,6 @@ var Note = require('../models/note.js');
 
 var urlencodedParser = bodyParser.urlencoded({extended: true});
 
-//DUMMY DATA
-
 //init database
 db.connect();
 var noteSchema = db.createSchema(Note.prototype.schema);

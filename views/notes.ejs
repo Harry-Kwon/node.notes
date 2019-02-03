@@ -15,17 +15,17 @@
     
     <div id="notes-list">
       <form>
-        <input type="text" name="name" placeholder="untitled" required/>
+        <input type="text" name="name" placeholder="untitled" autocomplete="off"/>
         <button type="submit">Add note</button>
       </form>
     
       <ul>
         <% for(var i=0; i<notes.length; i++) { %>
         <li id="<%=notes[i].id%>"> 
-					<p> title: <%= notes[i].name %> </p>
           <!--
-          <textarea> title: <%= notes[i].name %> </textarea>
+					<p> title: <%= notes[i].name %> </p>
 -->
+          <textarea rows="1"><%= notes[i].name %></textarea>
           <button class="edit" > edit </button>
           <button class="remove" > remove </button>
         </li>
