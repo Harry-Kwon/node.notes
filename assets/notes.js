@@ -19,7 +19,7 @@ $(document).ready(function(){
   
 	$('.remove').on('click', function(){
     var obj = $(this);
-    var id = obj.attr('id');
+    var id = obj.parent().attr('id');
     
     $.ajax({
       type: 'DELETE',
@@ -33,6 +33,5 @@ $(document).ready(function(){
   
 	$('.edit').on('click', function(){
     console.log('clicked edit button');
-    console.log('id: '+$(this).attr('id'));
   });
 });

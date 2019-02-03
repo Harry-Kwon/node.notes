@@ -21,10 +21,10 @@
     
       <ul>
         <% for(var i=0; i<notes.length; i++) { %>
-        <li> 
+        <li id="<%=notes[i].id%>"> 
           <p> title: <%= notes[i].name %> </p>
-          <button class="edit" id="<%=notes[i].id%>"> edit </button>
-          <button class="remove" id="<%=notes[i].id%>"> remove </button>
+          <button class="edit" > edit </button>
+          <button class="remove" > remove </button>
         </li>
         <% } %>
       </ul>
