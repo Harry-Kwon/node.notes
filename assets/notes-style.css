@@ -88,7 +88,21 @@ li p {
   justify-self: start;
 }
 
+li textarea{
+  width: 100%;
+  border-width: 3px;
+  border-color: black;
+  box-sizing: border-box;
+  
+  justify-self: start;
+  
+}
+
 li button {
   justify-self: end;
   margin: 3px;
+}
+
+.edit {
+  text-decoration: line-through;
 }
