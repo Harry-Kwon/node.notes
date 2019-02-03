@@ -17,7 +17,6 @@ module.exports = function (app) {
   //render view from data from database
   app.get('/notes', function(req, res){
     db.findRecord(NoteModel, {}, function(err, searchResults){
-      console.log(searchResults);
       res.render('notes', {notes: searchResults});
     });
   });

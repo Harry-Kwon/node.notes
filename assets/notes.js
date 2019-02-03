@@ -1,9 +1,25 @@
 $(document).ready(function(){
+  
+  $('form').on('submit', function(){
+
+      var item = $('form input');
+      var note = {name: item.val()};
+
+      $.ajax({
+        type: 'POST',
+        url: '/notes',
+        data: note,
+        success: function(data){
+          //do something with the data via front-end framework
+          location.reload();
+        }
+      });
+      return false;
+  });
+  
 	$('.remove').on('click', function(){
     var obj = $(this);
     var id = obj.attr('id');
-    console.log('clicked remove button');
-    console.log('id: '+id);
     
     $.ajax({
       type: 'DELETE',
@@ -12,7 +28,7 @@ $(document).ready(function(){
         obj.parent().remove();
       }
     });
-    
+    return false;
   });
   
 	$('.edit').on('click', function(){
