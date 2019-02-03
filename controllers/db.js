@@ -13,20 +13,39 @@ module.exports.createModel = function(name, schema) {
   return mongoose.model(name, schema);
 };
 
-module.exports.findRecord = function(model, search, callback) {
-  Todo.find(search, callback);
-};
 
 module.exports.createRecord = function(model, data, callback){
   var newRecord = model(data).save(function(err, data){
     if(err) throw err;
-    callback();
+    callback(err, data);
   });
 };
 
-module.exports.readRecord = function(){};
-module.exports.updateRecord = function(){};
-module.exports.deleteRecord = function(){};
+module.exports.findRecord = function(model, search, callback) {
+  model.find(search, function(err, data){
+    if (err) throw err;
+    callback(err, data);
+  });
+};
+
+module.exports.updateRecord = function(model, search, updateData, callback){
+  model.find(search, function(err, searchResult){
+    searchResult.forEach(function(record){
+      record.set(updateData);
+      record.save(function(err, updatedRecord) {
+        if (err) throw err;
+        callback(err, updatedRecord);
+      });
+    });
+  });
+};
+
+module.exports.deleteRecord= function(model, search, callback){
+  model.find(search).remove(function(err, data){
+    if(err) throw err;
+    callback(err, data);
+  });
+};
 
 module.exports.disconnect = function() {
   //disconnect from database

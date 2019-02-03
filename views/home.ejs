@@ -16,5 +16,11 @@
       <input type="text" name="name" placeholder="untitled" required/>
       <button type="submit">Add note</button>
     </form>
+    
+    <ul>
+      <% for(var i=0; i<notes.length; i++) { %>
+     		<li> title: <%= notes[i].name %> </li>
+      <% } %>
+    </ul>
   </body>
 </html>

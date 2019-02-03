@@ -16,7 +16,10 @@ module.exports = function (app) {
   
   //render view from data from database
   app.get('/notes', function(req, res){
-    res.render('home');
+    db.findRecord(NoteModel, {}, function(err, searchResults){
+      console.log(searchResults);
+      res.render('home', {notes: searchResults});
+    });
   });
   
   //create new note
@@ -33,9 +36,10 @@ module.exports = function (app) {
       console.log(data);
       res.json(data);
     });
-    
-    //res.sendFile('/assets/index.html', {root: __dirname+'/..'});
   });
+  
+  app.put('/notes', urlencodedParser, function(req, res){});
+  app.delete('/notes', urlencodedParser, function(req, res){});
 }
 
 
