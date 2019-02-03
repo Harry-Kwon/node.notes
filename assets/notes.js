@@ -7,7 +7,7 @@ $(document).ready(function(){
     
     $.ajax({
       type: 'DELETE',
-      url: '/todo/'+id,
+      url: '/notes/'+id,
       success: function(data){
         obj.parent().remove();
       }

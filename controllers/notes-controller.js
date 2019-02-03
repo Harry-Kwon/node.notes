@@ -39,7 +39,12 @@ module.exports = function (app) {
   });
   
   app.put('/notes', urlencodedParser, function(req, res){});
-  app.delete('/notes', urlencodedParser, function(req, res){});
+  app.delete('/notes/:noteId', urlencodedParser, function(req, res){
+    console.log('delete request of id: ' + req.params.noteId);
+    db.deleteRecord(NoteModel, {id: req.params.noteId}, function(err, data){
+      res.json(data);
+    });
+  });
 }
 
 
