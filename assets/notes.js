@@ -1,22 +1,24 @@
 $(document).ready(function(){
-
-  $('form').on('submit', function(){
-
-      var item = $('form input');
-      var note = {name: item.val()};
-
-      $.ajax({
-        type: 'POST',
-        url: '/notes',
-        data: note,
-        success: function(data){
-          //do something with the data via front-end framework
-          location.reload();
-        }
-      });
-
-      return false;
-
+	$('.remove').on('click', function(){
+    var obj = $(this);
+    console.log('clicked remove button');
+    console.log('id: '+obj.attr('id'));
+    
+    var noteData = {id: obj.attr('id')};
+    
+    $.ajax({
+      type: 'Post',
+      url: '/todo',
+      data: noteData,
+      success: function(data){
+        obj.parent().remove();
+      }
+    });
+    
   });
-
+  
+	$('.edit').on('click', function(){
+    console.log('clicked edit button');
+    console.log('id: '+$(this).attr('id'));
+  });
 });

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Notes</title>
+    <link rel="stylesheet" href="notes-style.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.js"
+            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+            crossorigin="anonymous"></script>
+    <script src="notes.js"></script>
+  </head>
+  <body>
+    <h1>
+      Notes
+    </h1>
+    
+    <div id="notes-list">
+      <ul>
+        <% for(var i=0; i<notes.length; i++) { %>
+        <li> 
+          <p> title: <%= notes[i].name %> </p>
+          <button class="edit" id="<%=notes[i].id%>"> edit </button>
+          <button class="remove" id="<%=notes[i].id%>"> remove </button>
+        </li>
+        <% } %>
+      </ul>
+    </div>
+  </body>
+</html>

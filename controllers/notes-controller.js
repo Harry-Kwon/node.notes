@@ -18,7 +18,7 @@ module.exports = function (app) {
   app.get('/notes', function(req, res){
     db.findRecord(NoteModel, {}, function(err, searchResults){
       console.log(searchResults);
-      res.render('home', {notes: searchResults});
+      res.render('notes', {notes: searchResults});
     });
   });
   
