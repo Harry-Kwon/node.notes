@@ -33,5 +33,17 @@ $(document).ready(function(){
   
 	$('.edit').on('click', function(){
     console.log('clicked edit button');
+    var obj = $(this);
+    var id = obj.parent().attr('id');
+    var newTitle = obj.parent().children('textarea').val();
+    console.log(newTitle);
+    $.ajax({
+      type: 'PUT',
+      url: '/notes/'+id,
+      data: {name: newTitle},
+      success: function(data){
+        //
+      }
+    });
   });
 });

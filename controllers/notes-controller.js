@@ -35,7 +35,18 @@ module.exports = function (app) {
     });
   });
   
-  app.put('/notes', urlencodedParser, function(req, res){});
+  app.put('/notes/:noteId', urlencodedParser, function(req, res){
+    console.log(req.params.noteId);
+    console.log(req.body);
+    db.updateRecord(NoteModel, 
+                    {id: req.params.noteId},
+                    {name: req.body.name},
+                    function(err, data){
+      console.log(data);
+      res.json(data);
+    });
+  });
+  
   app.delete('/notes/:noteId', urlencodedParser, function(req, res){
     console.log('delete request of id: ' + req.params.noteId);
     db.deleteRecord(NoteModel, {id: req.params.noteId}, function(err, data){

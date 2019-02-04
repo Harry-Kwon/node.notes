@@ -30,8 +30,16 @@ module.exports.findRecord = function(model, search, callback) {
 
 module.exports.updateRecord = function(model, search, updateData, callback){
   model.find(search, function(err, searchResult){
+    console.log('searchResult');
+    console.log(searchResult);
     searchResult.forEach(function(record){
+      console.log('record');
+      console.log(record);
+      console.log('1');
+      console.log(updateData);
       record.set(updateData);
+      console.log('2');
+      console.log(record);
       record.save(function(err, updatedRecord) {
         if (err) throw err;
         callback(err, updatedRecord);
