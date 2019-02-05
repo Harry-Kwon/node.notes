@@ -1,20 +1,18 @@
 var bodyParser = require('body-parser');
 var db = require('./db.js');
-var Note = require('./note.js');
+const uuidv4 = require('uuid/v4');
 
 var urlencodedParser = bodyParser.urlencoded({extended: true});
 
 //init database
-db.connect();
-var noteSchema = db.createSchema(Note.prototype.schema);
-var NoteModel = db.createModel('Note', noteSchema);
+db.connect('');
 
 //params: app - express app
 module.exports = function (app) {
   
   //render view from data from database
   app.get('/notes', function(req, res){
-    db.findRecord(NoteModel, {}, function(err, searchResults){
+    db.findNotes({}, function(searchResults){
       console.log(searchResults);
       res.render('notes', {notes: searchResults});
     });
@@ -22,26 +20,25 @@ module.exports = function (app) {
   
   //create new note
   app.post('/notes', urlencodedParser, function(req, res){
-    
-		var newNote = new Note(req.body);
-    db.createRecord(NoteModel, newNote.data, function(err, data) {
-      res.json(data);
-    });
+    let noteData = {title: req.body.title, id: uuidv4()};
+    db.createNote(noteData);
+    res.end('');
   });
   
+  // update note
   app.put('/notes/:noteId', urlencodedParser, function(req, res){
-    db.updateRecord(NoteModel, 
-                    {id: req.params.noteId},
-                    {title: req.body.title},
-                    function(err, data){
-      res.json(data);
+    console.log(req.params.noteId);
+    console.log(req.body.title);
+    db.updateNoteTitle(req.params.noteId, req.body.title, function(raw){
+      res.json(raw);
     });
   });
   
+  // remove note
   app.delete('/notes/:noteId', urlencodedParser, function(req, res){
-    db.deleteRecord(NoteModel, {id: req.params.noteId}, function(err, data){
-      res.json(data);
-    });
+    let query = {id: req.params.noteId};
+    db.removeNote(query);
+    res.end('');
   });
 }
 
