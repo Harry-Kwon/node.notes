@@ -28,7 +28,7 @@ db.findNotes = function(query, callback) {
 // title - new title of note
 // returns - raw response from mongo
 db.updateNoteTitle = function(noteId, noteTitle, callback) {
-  Note.updateOne({id: noteId}, {title: noteTitle}, function(err, raw){
+  Note.updateOne({_id: noteId}, {title: noteTitle}, function(err, raw){
     if(err) throw err;
     callback(raw);
   });
@@ -42,13 +42,14 @@ db.removeNote = function(query) {
   
 }
 
-module.exports.createModel = function(name, schema) {
-  return mongoose.model(name, schema);
-};
 
 
 module.exports = db;
 /*
+module.exports.createModel = function(name, schema) {
+  return mongoose.model(name, schema);
+};
+
 module.exports.createRecord = function(model, data, callback){
   var newRecord = model(data).save(function(err, data){
     if(err) throw err;

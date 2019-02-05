@@ -20,7 +20,7 @@ module.exports = function (app) {
   
   //create new note
   app.post('/notes', urlencodedParser, function(req, res){
-    let noteData = {title: req.body.title, id: uuidv4()};
+    let noteData = {title: req.body.title};
     db.createNote(noteData);
     res.end('');
   });
@@ -36,7 +36,7 @@ module.exports = function (app) {
   
   // remove note
   app.delete('/notes/:noteId', urlencodedParser, function(req, res){
-    let query = {id: req.params.noteId};
+    let query = {_id: req.params.noteId};
     db.removeNote(query);
     res.end('');
   });

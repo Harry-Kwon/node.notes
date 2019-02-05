@@ -1,7 +1,7 @@
 $(document).ready(function(){
   
+  //create new note
   $('form').on('submit', function(){
-
       var item = $('form input');
       var note = {title: item.val()};
 
@@ -17,6 +17,7 @@ $(document).ready(function(){
       return false;
   });
   
+  //remove note
 	$('.remove').on('click', function(){
     var obj = $(this);
     var id = obj.parent().attr('id');
@@ -31,6 +32,7 @@ $(document).ready(function(){
     return false;
   });
   
+  //edit note
 	$('.edit').on('click', function(){
     console.log('clicked edit button');
     var obj = $(this);
