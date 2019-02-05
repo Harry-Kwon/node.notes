@@ -3,7 +3,7 @@ $(document).ready(function(){
   $('form').on('submit', function(){
 
       var item = $('form input');
-      var note = {name: item.val()};
+      var note = {title: item.val()};
 
       $.ajax({
         type: 'POST',
@@ -40,7 +40,7 @@ $(document).ready(function(){
     $.ajax({
       type: 'PUT',
       url: '/notes/'+id,
-      data: {name: newTitle},
+      data: {title: newTitle},
       success: function(data){
         //
       }

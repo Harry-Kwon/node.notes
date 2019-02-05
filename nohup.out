@@ -311,3 +311,16 @@ created record :
     name: '{title: \'a weird title\'}',
     id: '5619e168-061d-42a9-a9bd-d6ba7124aa06',
     __v: 0 } ]
+Notes app listening on port 3000
+start post
+req body: 
+{ name: 'a' }
+creating new note: 
+{ name: 'a', id: 'cf8fbc7e-d13b-458c-94ad-ab6ab4e38a52' }
+created record :
+{ _id: 5c58e87ee0e4c218697a7a00,
+  name: 'a',
+  id: 'cf8fbc7e-d13b-458c-94ad-ab6ab4e38a52',
+  __v: 0 }
+delete request of id: f8d27f98-b8d1-436b-a29a-1c52ff8a4e28
+(node:6249) DeprecationWarning: collection.remove is deprecated. Use deleteOne, deleteMany, or bulkWrite instead.
