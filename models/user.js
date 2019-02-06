@@ -1,7 +1,15 @@
 //user model
 const mongoose = require('mongoose');
 
-let noteSchema = new mongoose.Schema({
-  name: String,
-  email: String,
+const userSchema = new mongoose.Schema({
+  username: String,
+	passwordHash: String,
+  passwordSalt: String,
+  sessionId: String,
 });
+
+const modelName = 'User';
+
+var UserModel = mongoose.model(modelName, userSchema);
+
+module.exports = UserModel;

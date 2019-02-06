@@ -1,5 +1,6 @@
 var express = require('express');
 var notesController = require('./controllers/notes-controller');
+var userController = require('./controllers/user-controller');
 
 //create express app
 var app = express();
@@ -12,6 +13,7 @@ app.use(express.static('./assets'));
 
 //fire controllers
 notesController(app);
+userController(app);
 
 //listen to port
 app.listen(3000);

@@ -1,11 +1,7 @@
 var bodyParser = require('body-parser');
 var db = require('./db.js');
-const uuidv4 = require('uuid/v4');
 
 var urlencodedParser = bodyParser.urlencoded({extended: true});
-
-//init database
-db.connect('');
 
 //params: app - express app
 module.exports = function (app) {
@@ -20,6 +16,7 @@ module.exports = function (app) {
   
   //create new note
   app.post('/notes', urlencodedParser, function(req, res){
+    console.log(req.body);
     let noteData = {title: req.body.title};
     db.createNote(noteData);
     res.end('');

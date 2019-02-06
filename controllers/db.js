@@ -1,11 +1,12 @@
 var mongoose = require('mongoose');
 var Note = require('../models/note.js');
+var User = require('../models/user.js');
 
 var db = {};
-
 db.connect = function(connectionUrl){
   mongoose.connect('mongodb://test:password1@ds053370.mlab.com:53370/notes-app', {useNewUrlParser: true});
 }
+db.connect('');
 
 // noteData - object containing data about model instance/document
 db.createNote = function(noteData) {
@@ -42,50 +43,22 @@ db.removeNote = function(query) {
   
 }
 
+// query - query document of user to search for
+// callback(docs) - passes array of user documents satisfying query
+db.findUser = function(query, callback) {
+  User.find(query, function(err, data){
+    if(err) throw err;
+    callback(data);
+  });
+}
+
+db.createUser = function(userData, callback) {
+  let createdUser = new User(userData);
+  createdUser.save(function (err, product){
+    if(err) throw err;
+    callback(product);
+  });
+};
 
 
 module.exports = db;
-/*
-module.exports.createModel = function(name, schema) {
-  return mongoose.model(name, schema);
-};
-
-module.exports.createRecord = function(model, data, callback){
-  var newRecord = model(data).save(function(err, data){
-    if(err) throw err;
-    callback(err, data);
-  });
-};
-
-module.exports.findRecord = function(model, search, callback) {
-  model.find(search, function(err, data){
-    if (err) throw err;
-    callback(err, data);
-  });
-};
-
-module.exports.updateRecord = function(model, search, updateData, callback){
-  model.find(search, function(err, searchResult){
-    searchResult.forEach(function(record){
-      record.set(updateData);
-      record.save(function(err, updatedRecord) {
-        if (err) throw err;
-        callback(err, updatedRecord);
-      });
-    });
-  });
-};
-
-module.exports.deleteRecord= function(model, search, callback){
-  model.find(search).remove(function(err, data){
-    if(err) throw err;
-    callback(err, data);
-  });
-};
-
-module.exports.disconnect = function() {
-  //disconnect from database
-	mongoose.disconnect();
-};
-
-*/
