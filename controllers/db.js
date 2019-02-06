@@ -60,5 +60,4 @@ db.createUser = function(userData, callback) {
   });
 };
 
-
 module.exports = db;
