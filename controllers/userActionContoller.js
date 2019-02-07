@@ -33,8 +33,7 @@ function getSubset(keyArr, obj){
 
 module.exports = function (app) {
   //use session middleware
-  console.log('using a dummy session secret');
-  app.use(session({secret: 'DUMMY_SECRET',
+  app.use(session({secret: uuidv4(),
                    maxAge: 60000,
                    resave: false,
                    saveUninitialized: false,
@@ -42,13 +41,13 @@ module.exports = function (app) {
   
   // checks if username is valid
   // returns true if user with <username> does not exist in database
-  app.get('/users/available/:username', function(req, res){
+  app.get('/users/action/available/:username', function(req, res){
     validateUsername(req.params.username, function(isValid){
       res.send({valid: isValid});
     });
   });
   
-  app.post('/users/sign-up', urlencodedParser, function(req, res){
+  app.post('/users/action/sign-up', urlencodedParser, function(req, res){
     
     validateUsername(req.body.username, function(isValid){
       if(isValid) {
@@ -74,7 +73,7 @@ module.exports = function (app) {
   // takes username and password 
   // checks saved passwordhash against input passwordhash
   // returns sessionId to response if valid
-  app.post('/users/login', urlencodedParser, function(req, res){
+  app.post('/users/action/login', urlencodedParser, function(req, res){
     //find user by username
     db.findUser({username: req.body.username}, function(data){
       if(!data[0]) throw {};
@@ -98,7 +97,7 @@ module.exports = function (app) {
     });
   });
   
-  app.get('/users/logout/:username', function(req, res){
+  app.get('/users/action/logout/:username', function(req, res){
     //destroy session
     req.session.destroy(function(){
       db.findUser({username: req.params.username}, function(data){

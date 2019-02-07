@@ -1,6 +1,6 @@
 var express = require('express');
-var notesController = require('./controllers/notes-controller');
-var userController = require('./controllers/user-controller');
+var notesController = require('./controllers/notesController.js');
+var userController = require('./controllers/userActionController.js');
 
 //create express app
 var app = express();
