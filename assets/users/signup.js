@@ -12,6 +12,7 @@ $(document).ready(function(){
       data: formData,
       success: function(data){
         console.log('signup successful');
+        window.location.href = "./login.html";
       }
     });
     } catch(err){
