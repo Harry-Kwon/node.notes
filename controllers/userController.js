@@ -1,7 +1,6 @@
 var bodyParser = require('body-parser');
 var db = require('./db.js');
 var uuidv4 = require('uuid/v4');
-var session = require('express-session');
 
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
@@ -32,19 +31,20 @@ function getSubset(keyArr, obj){
 }
 
 module.exports = function (app) {
-  //use session middleware
-  app.use(session({secret: uuidv4(),
-                   maxAge: 60000,
-                   resave: false,
-                   saveUninitialized: true,
-                   cookie: {/*secure:true*/}}));
-  
   // checks if username is valid
   // returns true if user with <username> does not exist in database
   app.get('/users/action/available/:username', function(req, res){
     validateUsername(req.params.username, function(isValid){
       res.send({valid: isValid});
     });
+  });
+
+  app.get('/signup', function(req, res){
+    res.render('home', {actionType: 'signup'});
+  });
+
+  app.get('/login', function(req, res){
+    res.render('home', {actionType: 'login'});
   });
   
   app.post('/users/action/signup', urlencodedParser, function(req, res){

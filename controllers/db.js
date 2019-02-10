@@ -52,6 +52,7 @@ db.findUser = function(query, callback) {
   });
 }
 
+// create new user
 db.createUser = function(userData, callback) {
   let createdUser = new User(userData);
   createdUser.save(function (err, product){
