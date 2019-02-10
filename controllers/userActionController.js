@@ -47,7 +47,7 @@ module.exports = function (app) {
     });
   });
   
-  app.post('/users/action/sign-up', urlencodedParser, function(req, res){
+  app.post('/users/action/signup', urlencodedParser, function(req, res){
     
     validateUsername(req.body.username, function(isValid){
       if(isValid) {
@@ -98,21 +98,24 @@ module.exports = function (app) {
   });
   
   app.get('/users/action/logout/:username', function(req, res){
-    //destroy session
-    req.session.destroy(function(){
-      db.findUser({username: req.params.username}, function(data){
-        if(!data[0]) throw {};
-        if(data.length>1) throw {};
-        let user = data[0];
-        
-        //unbind user to sessionId
-        user.sessionId = '';
-        user.save();
-        
-        console.log('user: ' + user.username + ' logged out');
-        
-      	res.send('goodbye!');
-      });
+    //verify user
+    db.findUser({username: req.params.username}, function(data){
+      if(!data[0]) throw {};
+      if(data.length>1) throw {};
+      let user = data[0];
+      
+      if(user.sessionId === req.sessionID) {
+        //destroy session
+        req.session.destroy(function(){
+          user.sessionId = '';
+          user.save();
+          console.log('user: ' + user.username + ' logged out');
+          
+          res.send('goodbye!');
+        });
+      } else {
+        res.status(401).send('unauthorized logout request');
+      }
     });
   })
   
