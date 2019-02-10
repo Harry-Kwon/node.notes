@@ -16,5 +16,6 @@ notesController(app);
 userController(app);
 
 //listen to port
-app.listen(3000);
-console.log('Notes app listening on port 3000');
+app.listen(80);
+console.log('Notes app listening on port 80');
+console.log('FOR DEVELOPMENT SERVER ONLY. LISTEN ON 3000 AND USE A REVERSE PROXY ON A PROUDCTION SERVER')

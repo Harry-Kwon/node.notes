@@ -36,7 +36,7 @@ module.exports = function (app) {
   app.use(session({secret: uuidv4(),
                    maxAge: 60000,
                    resave: false,
-                   saveUninitialized: false,
+                   saveUninitialized: true,
                    cookie: {/*secure:true*/}}));
   
   // checks if username is valid
