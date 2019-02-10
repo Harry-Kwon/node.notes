@@ -44,6 +44,10 @@ form input {
   justify-self: start;
 }
 
+form input:invalid {
+  background-color: pink;
+}
+
 form buttom {
   justify-self: end;
   margin: 3px;

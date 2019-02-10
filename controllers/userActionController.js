@@ -47,13 +47,14 @@ module.exports = function (app) {
     });
   });
   
-  app.post('/users/action/sign-up', urlencodedParser, function(req, res){
+  app.post('/users/action/signup', urlencodedParser, function(req, res){
     
     validateUsername(req.body.username, function(isValid){
       if(isValid) {
         //generate salt using bcrpyt
         bcrypt.genSalt(saltRounds, function(err, salt){
           //hash password
+          console.log('salt: ' + salt);
           bcrypt.hash(req.body.password, salt, function(err, hash){
             //save salt and password
             db.createUser({username: req.body.username,

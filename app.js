@@ -15,6 +15,10 @@ app.use(express.static('./assets'));
 notesController(app);
 userController(app);
 
+app.use(function(req, res){
+  res.status(404).send('page not found');
+});
+
 //listen to port
 app.listen(3000);
 console.log('Notes app listening on port 3000');
