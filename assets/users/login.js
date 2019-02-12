@@ -14,6 +14,8 @@ $(document).ready(function(){
         data: formData,
         success: function(data){
           console.log('login successful');
+          console.log(document.domain);
+          window.location.href='/notes';
         }
       });
     } catch(err){
