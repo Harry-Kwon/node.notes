@@ -1,6 +1,7 @@
 var express = require('express');
 var notesController = require('./controllers/notesController.js');
-var userController = require('./controllers/userActionController.js');
+var userController = require('./controllers/userController.js');
+var session = require('express-session');
 
 //create express app
 var app = express();
@@ -10,6 +11,19 @@ app.set('view engine', 'ejs');
 
 //static files
 app.use(express.static('./assets'));
+
+//sessions
+app.use(session({secret: 'dummy secret',
+                 maxAge: 60000,
+                 resave: false,
+                 saveUninitialized: true,
+                 cookie: {/*secure:true*/}}));
+
+
+
+app.get('/', function(req, res){
+  res.render('home', {actionType: 'signup'});
+});
 
 //fire controllers
 notesController(app);
