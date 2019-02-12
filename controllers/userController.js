@@ -14,7 +14,7 @@ function validateUsername(candidateUsername, callback) {
     let isValid = (docs.length===0);
     
     if(isValid){
-      let format = /[!]/;
+      let format = /[\W]/;
       isValid = !format.test(candidateUsername)
     }
     
@@ -30,6 +30,16 @@ function getSubset(keyArr, obj){
   return subset;
 }
 
+function logoutSession(sessionId) {
+    db.findUser({sessionId: sessionId}, function(data){
+      if(data.length!=1) return;
+      let user = data[0];
+      
+      user.sessionId = '';
+      user.save();
+    });
+}
+
 module.exports = function (app) {
   // checks if username is valid
   // returns true if user with <username> does not exist in database
@@ -39,6 +49,7 @@ module.exports = function (app) {
     });
   });
 
+  /** Routing for '/signup' **/
   app.get('/signup', function(req, res){
     res.render('home', {actionType: 'signup'});
   });
@@ -49,6 +60,7 @@ module.exports = function (app) {
   
   app.post('/users/action/signup', urlencodedParser, function(req, res){
     
+    //check if new username is valid
     validateUsername(req.body.username, function(isValid){
       if(isValid) {
         //generate salt using bcrpyt
@@ -74,6 +86,8 @@ module.exports = function (app) {
   // checks saved passwordhash against input passwordhash
   // returns sessionId to response if valid
   app.post('/users/action/login', urlencodedParser, function(req, res){
+    logoutSession(req.sessionID);
+
     //find user by username
     db.findUser({username: req.body.username}, function(data){
       if(!data[0]) throw {};
@@ -97,25 +111,20 @@ module.exports = function (app) {
     });
   });
   
-  app.get('/users/action/logout/:username', function(req, res){
-    //verify user
-    db.findUser({username: req.params.username}, function(data){
-      if(!data[0]) throw {};
-      if(data.length>1) throw {};
+  app.get('/users/action/logout', function(req, res){
+    //find user by sessionId
+    db.findUser({sessionId: req.req.sessionID}, function(data){
+      if(data.length!=1) throw {};
       let user = data[0];
       
-      if(user.sessionId === req.sessionID) {
-        //destroy session
-        req.session.destroy(function(){
-          user.sessionId = '';
-          user.save();
-          console.log('user: ' + user.username + ' logged out');
-          
-          res.send('goodbye!');
-        });
-      } else {
-        res.status(401).send('unauthorized logout request');
-      }
+      //destroy session
+      req.session.destroy(function(){
+        user.sessionId = '';
+        user.save();
+        console.log('user: ' + user.username + ' logged out');
+        
+        res.send('goodbye!');
+      });
     });
   })
   
@@ -134,6 +143,5 @@ module.exports = function (app) {
       }
     });
   })
-          
 
 }

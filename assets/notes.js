@@ -10,7 +10,7 @@ $(document).ready(function(){
         url: '/notes',
         data: note,
         success: function(data){
-          //do something with the data via front-end framework
+          //create new note element
           location.reload();
         }
       });

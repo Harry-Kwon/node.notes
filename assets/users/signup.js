@@ -12,6 +12,16 @@ $(document).ready(function(){
       data: formData,
       success: function(data){
         console.log('signup successful');
+        //send login request
+        $.ajax({
+          type: 'POST',
+          url: '/users/action/login',
+          data: formData,
+          success: function(data){
+            console.log('login successful');
+            window.location.href='/notes';
+          }
+        });
       }
     });
     } catch(err){

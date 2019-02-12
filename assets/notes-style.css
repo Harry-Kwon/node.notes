@@ -1,7 +1,7 @@
 body {
-  background: skyblue;
-  font-family: verdana;
-  color: #fff;
+  background: white;
+  font-family: arial;
+  color: black;
   padding: 20px;
 }
 
@@ -124,4 +124,44 @@ li button {
 
 .edit {
   text-decoration: line-through;
+}
+
+.userForm {
+  padding: 10px 5px;
+  margin: auto;
+  width: 300px;
+  background-color: white;
+  color: black;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.userForm h {
+  font-size: 24px;
+  text-transform: bold;
+  letter-spacing: 2px;
+}
+
+.userForm form {
+  width: 80%;
+  margin: 0;
+  padding: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.userForm form input {
+  margin: 10px 0;
+  padding: 5px 2px;
+
+  border-width: 2px;
+  border-color: black;
+  border-style: solid;
+  box-sizing: border-box;
+  border-radius: 4px;
 }

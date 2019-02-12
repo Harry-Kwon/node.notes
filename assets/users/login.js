@@ -8,6 +8,8 @@ $(document).ready(function(){
       formData.password=$(this).find('.password-input').val();
       console.log(window.location.href);
       console.log(formData);
+
+      //send login request
       $.ajax({
         type: 'POST',
         url: '/users/action/login',

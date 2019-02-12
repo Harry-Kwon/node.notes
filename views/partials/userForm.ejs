@@ -1,7 +1,11 @@
-<div id=<%=actionType%> >
+<div class=userForm >
   <script src=<%='/users/'+actionType+'.js'%>></script>
+  <h><%= actionType %></h>
   <form>
+    <h>Username</h>
     <input class="username-input" type="text" name="username" placeholder="username" autocomplete="off"/>
+    
+    <h>Password</h>
     <input class="password-input" type="password" name="password" placeholder="password" autocomplete="off"/>
     <button type="submit"><%=actionType%></button>
   </form>
